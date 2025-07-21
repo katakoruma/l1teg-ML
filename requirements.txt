@@ -1,0 +1,17 @@
+dotenv
+mlflow 
+protobuf
+xgboost
+numpy
+tqdm
+typer[all]
+PyYAML
+hist
+matplotlib
+corner
+mplhep
+scikit-learn
+bayesian-optimization
+uproot
+bithub@git+https://github.com/pviscone/BitHub.git
+conifer@git+https://github.com/pviscone/conifer.git@temp_master
