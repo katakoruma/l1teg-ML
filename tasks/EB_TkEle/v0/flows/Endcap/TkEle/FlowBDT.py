@@ -5,7 +5,7 @@ from CMGRDF import Define
 from CMGRDF.collectionUtils import DefineSkimmedCollection
 
 from cpp import load_conifer
-from flows.Barrel.TkEle import FlowBase as base
+from flows.Endcap.TkEle import FlowBase as base
 
 
 def flow(bdt_path=None, n_bits=8):

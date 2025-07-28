@@ -1,7 +1,7 @@
 from CMGRDF import Define
 from cpp import load_clupt_h
 
-from flows.Barrel.TkEle import FlowBase as base
+from flows.Endcap.TkEle import FlowBase as base
 
 def flow(pt_hist=None, bkg_pt_cut=64.0):
     assert pt_hist is not None, "pt_hist ('filepath,sig_branch,bkg_branch') must be provided"

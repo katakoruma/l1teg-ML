@@ -6,8 +6,8 @@ from cpp import include_xilinx
 
 include_xilinx.declare("quantize")
 
-cryclu_name = "DecEmCaloBarrel"
-tk_name = "DecTkBarrel"
+cryclu_name = "DecHadCaloHGCal"
+tk_name = "DecTkHGCal"
 genele_name = "GenEl"
 
 
@@ -25,7 +25,7 @@ def flow(region="EE"):
         "matching",
         [
             #! ---------- Acceptance selection --------- #
-            DefineSkimmedCollection("GenEl", mask=f"abs(GenEl_eta) {region_sel}"),
+            DefineSkimmedCollection("GenEl", mask=f"abs(GenEl_eta) > 1.479 && abs(GenEl_eta) < 2.4"),
             #! ----------------- Alias ----------------- #
             AliasCollection("GenEle", genele_name),
             AliasCollection("CryClu", cryclu_name),
@@ -67,7 +67,6 @@ def flow(region="EE"):
                 "TkEle_CryClu",
                 "CryClu",
                 indices="TkEle_CryClu_idx",
-                members=["pt", "eta", "phi", "caloIso", "hwQual", "showerShape"],
             ),
             DefineSkimmedCollection(
                 "TkEle_Tk",
