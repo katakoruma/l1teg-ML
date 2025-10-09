@@ -12,6 +12,8 @@ from utils.data import (
     df_to_DMatrix
 )
 
+modelpath = '/eos/user/l/lekerner/www/l1teg/Barrel/2'
+
 from bithub.scalers import BitScaler
 
 from params import features, auxiliary, tag, P0
@@ -37,7 +39,7 @@ def get_dmatrix(precision = None, q_scaler="float"):
     )
 
     scaler = BitScaler()
-    scaler.load(f"results/q_{q_scaler}/scaler.json")
+    scaler.load(f"{modelpath}/results/q_{q_scaler}/scaler.json")
 
 
     dmatrix = df_to_DMatrix(
@@ -55,7 +57,7 @@ def get_dmatrix(precision = None, q_scaler="float"):
 def convert(backend, precision, build = False, predict = False):
     df_test, dmatrix = get_dmatrix(q_scaler=precision)
 
-    model = f"results/q_{precision}/model.json"
+    model = f"{modelpath}/results/q_{precision}/model.json"
     #!----------------------VIVADO ENVS----------------------!#
     os.environ["PATH"] = "/data2/Xilinx/Vivado/2024.2/bin:/data2/Xilinx/Vitis_HLS/2024.2/bin:" + os.environ["PATH"]
 
@@ -77,7 +79,7 @@ def convert(backend, precision, build = False, predict = False):
         cfg["Precision"] = f"ap_fixed<{precision},1,AP_RND_CONV,AP_SAT>"
         cfg["score_precision"] = "ap_fixed<11,4,AP_RND_CONV,AP_SAT>"
 
-    cfg["OutputDir"] = f"results/q_{precision}/conifer_model_{backend}"
+    cfg["OutputDir"] = f"{modelpath}/results/q_{precision}/conifer_model_{backend}"
 
 
     #!----------------------Load Model----------------------!#
@@ -110,8 +112,8 @@ def convert(backend, precision, build = False, predict = False):
 # %%
 def save(cfg, hls_model, precision):
     import json
-    hls_model.save(f"results/q_{precision}/conifer_model.json")
-    with open(f"results/q_{precision}/conifer_conf.json", "w") as f:
+    hls_model.save(f"{modelpath}/results/q_{precision}/conifer_model.json")
+    with open(f"{modelpath}/results/q_{precision}/conifer_conf.json", "w") as f:
         f.write(json.dumps(cfg, indent=4))
 
 
@@ -131,8 +133,8 @@ for q in [8]:
     plt.legend()
     hep.cms.text("Phase-2 Simulation Preliminary", fontsize=18, ax = ax)
     hep.cms.lumitext("PU 200 (14 TeV)", fontsize=18, ax = ax)
-    fig.savefig(f"results/q_{q}/plots/hls_vs_xgb.png")
-    fig.savefig(f"results/q_{q}/plots/hls_vs_xgb.pdf")
+    fig.savefig(f"{modelpath}/results/q_{q}/plots/hls_vs_xgb.png")
+    fig.savefig(f"{modelpath}/results/q_{q}/plots/hls_vs_xgb.pdf")
 
 
 # %%

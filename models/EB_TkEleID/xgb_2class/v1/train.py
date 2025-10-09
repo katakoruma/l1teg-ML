@@ -23,7 +23,7 @@ from bayes_opt import BayesianOptimization
 import numpy as np
 import xgboost as xgb
 
-from params import features, auxiliary, samples, tag, P0
+from params_pu200 import features, auxiliary, samples, tag, P0, saturate
 import pandas as pd
 
 # %%
@@ -45,12 +45,12 @@ df_train, df_test = concatenate(
 
 # scaler = None
 
-# %%
+#%%
 #!------------------------------------ Train XGBoost Model -----------------------------------!#
 # what = train, optimize
 what = "train"
 
-quantizations = [8,9,"float"]
+quantizations = ["float"]
 quant_aucs = {}
 quant_models = {}
 quant_params = {}
@@ -62,16 +62,7 @@ for quant in quantizations:
         df_train,
         columns=features,
         target=(-1 , 1 ),
-        saturate={"TkEle_PtRatio": (0, 32),
-                  "TkEle_Tk_chi2RPhi": (0, 16),
-                  "TkEle_Tk_ptFrac": (0, 64),
-                  "TkEle_CryClu_relIso": (0, 1),
-                  "TkEle_CryClu_pt": (0, 64),
-                  "TkEle_CryClu_showerShape": (0, 1),
-                  "TkEle_absdphi": (0, 64),
-                  "TkEle_absdeta": (0, 8),
-                  "TkEle_nTkMatch": (0, 16),
-                  },
+        saturate=saturate,
         precision = quant-1 if quant != "float" else None
     )
 
@@ -207,41 +198,41 @@ for quant in quantizations:
         save=f"results/q_{quant}/plots/roc",
     )
     #!------------------------------------ Best per cluster ----------------------------------!#
-    plot_roc(
-        df_train_best,
-        df_test_best[
-            df_test_best["TkEle_CryClu_pt"] < df_train_best["TkEle_CryClu_pt"].max()
-        ],
-        score="score",
-        y="TkEle_label",
-        save=f"results/q_{quant}/plots/roc_bestTkEle",
-    )
+    # plot_roc(
+    #     df_train_best,
+    #     df_test_best[
+    #         df_test_best["TkEle_CryClu_pt"] < df_train_best["TkEle_CryClu_pt"].max()
+    #     ],
+    #     score="score",
+    #     y="TkEle_label",
+    #     save=f"results/q_{quant}/plots/roc_bestTkEle",
+    # )
 
     #!------------------------------------ ROC per pt ----------------------------------!#
-    _, aucs = plot_roc_bins(
-        df_test_best,
-        score="score",
-        label="$p_T$",
-        units="GeV",
-        y="TkEle_label",
-        var_name="TkEle_CryClu_pt",
-        xlim=(-0.025, 0.5),
-        var_bins=pt_bins,
-        save=f"results/q_{quant}/plots/roc_pt_bestTkEle_test",
-    )
-
-    plot_roc_bins(
-        df_train_best,
-        score="score",
-        label="$p_T$",
-        units="GeV",
-        y="TkEle_label",
-        var_name="TkEle_CryClu_pt",
-        xlim=(-0.025, 0.5),
-        var_bins=pt_bins,
-        save=f"results/q_{quant}/plots/roc_pt_bestTkEle_train",
-    )
-    quant_aucs[f"{quant}"] = aucs
+    # _, aucs = plot_roc_bins(
+    #     df_test_best,
+    #     score="score",
+    #     label="$p_T$",
+    #     units="GeV",
+    #     y="TkEle_label",
+    #     var_name="TkEle_CryClu_pt",
+    #     xlim=(-0.025, 0.5),
+    #     var_bins=pt_bins,
+    #     save=f"results/q_{quant}/plots/roc_pt_bestTkEle_test",
+    # )
+    #
+    # plot_roc_bins(
+    #     df_train_best,
+    #     score="score",
+    #     label="$p_T$",
+    #     units="GeV",
+    #     y="TkEle_label",
+    #     var_name="TkEle_CryClu_pt",
+    #     xlim=(-0.025, 0.5),
+    #     var_bins=pt_bins,
+    #     save=f"results/q_{quant}/plots/roc_pt_bestTkEle_train",
+    # )
+    # quant_aucs[f"{quant}"] = aucs
     quant_models[quant] = model
     quant_params[quant] = params
     scaler_quant[quant] = scaler

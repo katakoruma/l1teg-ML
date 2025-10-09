@@ -11,7 +11,7 @@ matplotlib
 corner
 mplhep
 scikit-learn
-bayesian-optimization
 uproot
+bayesian-optimization==3.0.1
 bithub@git+https://github.com/pviscone/BitHub.git
 conifer@git+https://github.com/pviscone/conifer.git@temp_master

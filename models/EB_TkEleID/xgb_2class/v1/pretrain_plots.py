@@ -19,7 +19,7 @@ sig_train, bkg_train = normalize_weight(
 # %%
 #!------------------------------------ Plot Pre-training -----------------------------------!#
 
-profile(sig_train, bkg_train, features=features, save="results/profile_{name}")
+#profile(sig_train, bkg_train, features=features, save="results/profile_{name}")
 plot_input_features(
     sig_train,
     bkg_train,

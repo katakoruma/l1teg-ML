@@ -15,6 +15,16 @@ cmgrdf_cli.defaults.histo3d_defaults = OrderedDict()
 
 # The first matched pattern will be used
 cmgrdf_cli.defaults.name_defaults = OrderedDict({
+    "(.*)_EmIdProb(.*)": dict(
+        bins=(2, 0, 2),
+        label="EmIdProb",
+        log="counts",
+    ),
+    "(.*)_PuIdProb(.*)": dict(
+        bins=(2, 0, 2),
+        label="PuIdProb$",
+        log="counts",
+    ),
     "(.*)_ptFrac(.*)": dict(
         bins=(64, 0, 64),
         label="($1) $p_{T}/\sum p_{T}$",
@@ -115,6 +125,66 @@ cmgrdf_cli.defaults.name_defaults = OrderedDict({
     "(.*)_weight(.*)": dict(
         bins=(100, 0, 2),
         label="($1) ($2) weight",
+        log="counts",
+    ),
+    "(.*)_firstlayer(.*)": dict(
+        bins=(20, 0, 100),
+        label="($1) ($2) First Layer",
+        log="counts",
+    ),
+    "(.*)_first1layers(.*)": dict(
+        bins=(30, 0, 1),
+        label="($1) ($2) First 1 Layers",
+        log="counts",
+    ),
+    "(.*)_first3layers(.*)": dict(
+        bins=(30, 0, 1),
+        label="($1) ($2) First 3 Layers",
+        log="counts",
+    ),
+    "(.*)_first5layers(.*)": dict(
+        bins=(30, 0, 1),
+        label="($1) ($2) First 5 Layers",
+        log="counts",
+    ),
+    "(.*)_firstHcal1layers(.*)": dict(
+        bins=(30, 0, 1),
+        label="($1) ($2) First 1 Layers",
+        log="counts",
+    ),
+    "(.*)_firstHcal3layers(.*)": dict(
+        bins=(30, 0, 1),
+        label="($1) ($2) First 3 Layers",
+        log="counts",
+    ),
+    "(.*)_firstHcal5layers(.*)": dict(
+        bins=(30, 0, 1),
+        label="($1) ($2) First 5 Layers",
+        log="counts",
+    ),
+    "(.*)_last1layers(.*)": dict(
+        bins=(30, 0, 1),
+        label="($1) ($2) Last 1 Layers",
+        log="counts",
+    ),
+    "(.*)_last3layers(.*)": dict(
+        bins=(30, 0, 1),
+        label="($1) ($2) Last 3 Layers",
+        log="counts",
+    ),
+    "(.*)_last5layers(.*)": dict(
+        bins=(30, 0, 1),
+        label="($1) ($2) Last 5 Layers",
+        log="counts",
+    ),
+    "(.*)_hbm(.*)": dict(
+        bins=(50, 0, 1),
+        label="($1) ($2) HBM",
+        log="counts",
+    ),
+    "(.*)_hoe(.*)": dict(
+        bins=(50, 0, 1),
+        label="($1) ($2) H/E",
         log="counts",
     ),
 })

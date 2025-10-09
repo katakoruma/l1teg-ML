@@ -18,20 +18,20 @@ def flow(pt_hist=None, bkg_pt_cut=64.0):
             Define(
                 "TkEle_weight",
                 f"(TkEle_CryClu_pt<{bkg_pt_cut})*reweight_pt_h(TkEle_CryClu_pt)",
-                samplePattern="MinBias_train",
+                samplePattern="MinBias.*",
             ),
             # all train apart from MinBias_train
             Define(
                 "TkEle_weight",
                 f"(TkEle_CryClu_pt<{bkg_pt_cut})*RVecF(nTkEle, 1.)",
-                samplePattern="^(?!MinBias_).*_train",
+                samplePattern="^(?!MinBias).*",
             ),
             # all other samples (non train)
-            Define(
-                "TkEle_weight",
-                "RVecF(nTkEle, 1.)",
-                samplePattern=".*(?<!_train)",
-            ),
+            # Define(
+            #     "TkEle_weight",
+            #     "RVecF(nTkEle, 1.)",
+            #     samplePattern=".*(?<!_train)",
+            # ),
         ],
         parent="matching",
     )
