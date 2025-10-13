@@ -37,7 +37,14 @@ features = [
     "CryClu_first1layers",
     "CryClu_first3layers",
     "CryClu_first5layers",
+    "CryClu_firstHcal1layers",
+    "CryClu_firstHcal3layers",
+    "CryClu_firstHcal5layers",
+    "CryClu_last1layers",
+    "CryClu_last3layers",
+    "CryClu_last5layers",
     "CryClu_emf",
+    "CryClu_hoe",
 ]
 
 auxiliary = [   "GenEle_pt", 
@@ -59,10 +66,10 @@ saturate = {
     "CryClu_pt": (0, 64),
     "Tk_chi2RPhi": (0, 16),
     "Tk_ptFrac": (0, 64),
-    "Tk_caloPhi": (0, 64),  # Default range added
+ #   "Tk_caloPhi": (0, 64),  # Default range added
     "Tk_caloEta": (0, 64),  # Default range added
-    "GenEle_calophi": (0, 64),  # Default range added
-    "GenEle_caloeta": (0, 64),  # Default range added
+ #    "GenEle_calophi": (0, 64),  # Default range added
+ #    "GenEle_caloeta": (0, 64),  # Default range added
     "GenEle_pt": (0, 64),  # Default range added
     "PtRatio": (0, 32),
     "nTkMatch": (0, 16),
@@ -72,6 +79,12 @@ saturate = {
     "CryClu_first1layers": (0, 64),  # Default range added
     "CryClu_first3layers": (0, 64),  # Default range added
     "CryClu_first5layers": (0, 64),  # Default range added
+    "CryClu_firstHcal1layers": (0, 64),  # Default range added
+    "CryClu_firstHcal3layers": (0, 64),  # Default range added
+    "CryClu_firstHcal5layers": (0, 64),  # Default range added
+    "CryClu_last1layers": (0, 64),  # Default range added
+    "CryClu_last3layers": (0, 64),  # Default range added
+    "CryClu_last5layers": (0, 64),  # Default range added
     "CryClu_hoe": (0, 64),  # Default range added
 }
 
