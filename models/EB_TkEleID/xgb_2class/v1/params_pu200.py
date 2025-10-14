@@ -14,7 +14,7 @@ features = [
 
 features = [
     "CryClu_pt",
-    "CryClu_eta",
+#    "CryClu_eta",
     # "CryClu_phi",
 #    "CryClu_showerShape",
 #    "CryClu_relIso",
@@ -25,7 +25,7 @@ features = [
     # "Tk_eta",
     # "Tk_phi",
    # "Tk_caloPhi",
-    "Tk_caloEta",
+#    "Tk_caloEta",
    # "GenEle_calophi",
    # "GenEle_caloeta",
    # "GenEle_pt",
@@ -33,16 +33,18 @@ features = [
     "nTkMatch",
     "absdeta",
     "absdphi",
-    "CryClu_firstlayer",
-    "CryClu_first1layers",
-    "CryClu_first3layers",
+    "CryClu_showerlength",
+    "CryClu_coreshowerlength",
+ #   "CryClu_firstlayer",
+ #   "CryClu_first1layers",
+ #   "CryClu_first3layers",
     "CryClu_first5layers",
     "CryClu_firstHcal1layers",
     "CryClu_firstHcal3layers",
     "CryClu_firstHcal5layers",
-    "CryClu_last1layers",
-    "CryClu_last3layers",
-    "CryClu_last5layers",
+ #   "CryClu_last1layers",
+ #   "CryClu_last3layers",
+ #   "CryClu_last5layers",
     "CryClu_emf",
     "CryClu_hoe",
 ]
@@ -75,6 +77,8 @@ saturate = {
     "nTkMatch": (0, 16),
     "absdeta": (0, 8),
     "absdphi": (0, 64),
+    "CryClu_showerlength": (0, 64),
+    "CryClu_coreshowerlength": (0, 64),
     "CryClu_firstlayer": (0, 64),  # Default range added
     "CryClu_first1layers": (0, 64),  # Default range added
     "CryClu_first3layers": (0, 64),  # Default range added
