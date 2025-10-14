@@ -17,10 +17,16 @@ features = [
 #    "CryClu_eta",
     # "CryClu_phi",
 #    "CryClu_showerShape",
-#    "CryClu_relIso",
+    "CryClu_EmIdProb",
+    "CryClu_PuIdProb",
+    "CryClu_piIdProb",
+    "CryClu_relIso",
+    "CryClu_caloIso",
 #    "CryClu_standaloneWP",
 #    "CryClu_looseL1TkMatchWP",
     "Tk_chi2RPhi",
+    "Tk_chi2Bend",
+    "Tk_chi2RZ",
     "Tk_ptFrac",
     # "Tk_eta",
     # "Tk_phi",
@@ -46,7 +52,7 @@ features = [
  #   "CryClu_last3layers",
  #   "CryClu_last5layers",
     "CryClu_emf",
-    "CryClu_hoe",
+ #   "CryClu_hoe",
 ]
 
 auxiliary = [   "GenEle_pt", 
@@ -66,8 +72,15 @@ samples = [
 
 saturate = {
     "CryClu_pt": (0, 64),
+    "CryClu_EmIdProb": (0, 1),
+    "CryClu_PuIdProb": (0, 1),
+    "CryClu_piIdProb": (0, 1),
     "Tk_chi2RPhi": (0, 16),
+    "Tk_chi2Bend": (0, 16),
+    "Tk_chi2RZ": (0, 16),
     "Tk_ptFrac": (0, 64),
+ #   "CryClu_relIso": (0, 1),
+ #   "CryClu_caloIso": (0, 1),
  #   "Tk_caloPhi": (0, 64),  # Default range added
     "Tk_caloEta": (0, 64),  # Default range added
  #    "GenEle_calophi": (0, 64),  # Default range added
@@ -89,6 +102,7 @@ saturate = {
     "CryClu_last1layers": (0, 64),  # Default range added
     "CryClu_last3layers": (0, 64),  # Default range added
     "CryClu_last5layers": (0, 64),  # Default range added
+#    "CryClu_emf": (0, 1),
     "CryClu_hoe": (0, 64),  # Default range added
 }
 
