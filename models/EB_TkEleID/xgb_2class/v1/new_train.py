@@ -166,3 +166,35 @@ plot_roc(
     y="TkEle_label",
     save=f"results/float/plots/roc",
 )
+
+#!------------------------------------ ROC per pt ----------------------------------!#
+
+pt_bins = (0, 5, 10, 20, 30, 50, 100)
+
+_, aucs = plot_roc_bins(
+    df_test_best,
+    score="score",
+    label="$p_T$",
+    units="GeV",
+    y="TkEle_label",
+    var_name="TkEle_CryClu_pt",
+    xlim=(-0.025, 0.5),
+    var_bins=pt_bins,
+    save=f"results/float/plots/roc_pt_bestTkEle_test",
+)
+
+plot_roc_bins(
+    df_train_best,
+    score="score",
+    label="$p_T$",
+    units="GeV",
+    y="TkEle_label",
+    var_name="TkEle_CryClu_pt",
+    xlim=(-0.025, 0.5),
+    var_bins=pt_bins,
+    save=f"results/float/plots/roc_pt_bestTkEle_train",
+)
+# quant_aucs[f"{quant}"] = aucs
+# quant_models[quant] = model
+# quant_params[quant] = params
+# scaler_quant[quant] = scaler
