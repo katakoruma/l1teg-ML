@@ -23,8 +23,11 @@ from bayes_opt import BayesianOptimization
 import numpy as np
 import xgboost as xgb
 
-from params_pu200 import features, auxiliary, samples, tag, P0, saturate
+from params_pu200 import features, auxiliary, samples, tag, P0, saturate, path
 import pandas as pd
+import json, os
+
+dir = 'model_1'
 
 # %%
 #!------------------------------------- Load Dataframe -------------------------------------!#
@@ -42,7 +45,16 @@ df_train, df_test = concatenate(
     {"train": [sig_train, bkg_train], "test": [sig_test, bkg_test]}
 )
 
-# scaler = None
+scaler = None
+scaler = BitScaler()
+scaler.fit(
+    df_train,
+    columns=features,
+    target=(-1 , 1 ),
+    saturate=saturate,
+#    precision = "float"
+)
+
 
 dtrain, dtest, dtest_cut = df_to_DMatrix(
     df_train,
@@ -145,15 +157,15 @@ df_test_best = pd.concat([sig_test_best, bkg_test_best])
 df_train_best = pd.concat([sig_train_best, bkg_train_best])
 # %%
 
-plot_loss(eval_result, save=f"results/float/plots/loss")
+plot_loss(eval_result, save=f"{path}/results/{dir}/plots/loss")
 
-plot_importance(model, save=f"results/float/plots/importance")
+plot_importance(model, save=f"{path}/results/{dir}/plots/importance")
 plot_scores(
     df_train,
     df_test[df_test["TkEle_CryClu_pt"] < df_train["TkEle_CryClu_pt"].max()],
     score="score",
     y="TkEle_label",
-    save=f"results/float/plots/scores",
+    save=f"{path}/results/{dir}/plots/scores",
     bins=np.linspace(-1, 1, 30),
     log=True,
 )
@@ -164,7 +176,7 @@ plot_roc(
     df_test[df_test["TkEle_CryClu_pt"] < df_train["TkEle_CryClu_pt"].max()],
     score="score",
     y="TkEle_label",
-    save=f"results/float/plots/roc",
+    save=f"{path}/results/{dir}/plots/roc",
 )
 
 #!------------------------------------ ROC per pt ----------------------------------!#
@@ -180,7 +192,7 @@ _, aucs = plot_roc_bins(
     var_name="TkEle_CryClu_pt",
     xlim=(-0.025, 0.5),
     var_bins=pt_bins,
-    save=f"results/float/plots/roc_pt_bestTkEle_test",
+    save=f"{path}/results/{dir}/plots/roc_pt_bestTkEle_test",
 )
 
 plot_roc_bins(
@@ -192,9 +204,26 @@ plot_roc_bins(
     var_name="TkEle_CryClu_pt",
     xlim=(-0.025, 0.5),
     var_bins=pt_bins,
-    save=f"results/float/plots/roc_pt_bestTkEle_train",
+    save=f"{path}/results/{dir}/plots/roc_pt_bestTkEle_train",
 )
 # quant_aucs[f"{quant}"] = aucs
 # quant_models[quant] = model
 # quant_params[quant] = params
 # scaler_quant[quant] = scaler
+
+
+# with open(f"{path}/results/{dir}/parameters.json", "w") as f:
+#     f.write(json.dumps(params, indent=4))
+
+# with open(f"{path}/results/{dir}/report.txt", "w") as f:
+#     f.write("--- Scaler ---\n")
+#     f.write("\n inf + (x - min) >> bit_shift\n\n")
+#     f.write(str(scaler))
+#     f.write("\n\n--- Parameters ---\n")
+#     f.write(str(params))
+
+model.save_model(f"{path}/results/{dir}/model.json")
+scaler.save(f"{path}/results/{dir}/scaler.json")
+
+
+# %%

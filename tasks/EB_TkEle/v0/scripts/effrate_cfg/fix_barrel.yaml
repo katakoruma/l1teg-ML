@@ -14,7 +14,7 @@ vars:
 
 objs_map:
     AR2024 (Tight):
-        global_tag: "140Xv0B9"
+        global_tag: "140Xv0C1"
         Eff_num: "era{global_tag}/TkEleL2Tight_All_1_full/{variable}.root:DoubleElectron_PU200"
         Eff_den: *denom
         Rate: "zsnap/era{global_tag}/TkEleL2Tight_All_1_full/MinBias.root"
@@ -26,7 +26,7 @@ objs_map:
         Bins: [ 0]
         Thrs: [-1]
     CMSSW:
-        global_tag: "140Xv0B9"
+        global_tag: "140Xv0C1"
         #Eff
         Eff_num: "zsnap/era{global_tag}/TkEleL2Loose_All_1_full/DoubleElectron_PU200.root" #MUST BE LOOSE
         Eff_den: *denom
@@ -41,7 +41,7 @@ objs_map:
         Bins: [0, 5, 10, 20, 30, 50]
         Thrs: [0.17, 0.018, -0.08, -0.11, -0.215, -0.15]
     151X (Tight):
-        global_tag: "140Xv0B9"
+        global_tag: "140Xv0C1"
         #Eff
         Eff_num: "zsnap/era{global_tag}/TkEleL2Loose_All_1_full/DoubleElectron_PU200.root" #MUST BE LOOSE
         Eff_den: *denom
@@ -56,7 +56,7 @@ objs_map:
         Bins: [ 0, 5, 10, 30]
         Thrs: [0.17, 0.018, -0.08, -0.11]
     Loose Elliptic:
-        global_tag: "140Xv0B9"
+        global_tag: "140Xv0C1"
         #Eff
         Eff_num: "zsnap/era{global_tag}/TkEleL2Loose_All_1_full/DoubleElectron_PU200.root" #MUST BE LOOSE
         Eff_den: *denom

@@ -28,19 +28,19 @@ objs_map:
         Eff_num: "era{global_tag}/TkEmL2Sig_1_TkEmL2Sig/{variable}.root:DoubleElectron_PU200"
         Eff_den: *denom
         Rate: "era{global_tag}/TkEmL2Bkg_1_TkEmL2Bkg/TkEmL2_pt.root:MinBias"
-        global_tag: "140Xv0B9"
+        global_tag: "140Xv0C1"
     CompositeID (??): #Loose ellipticID
         Eff_num: "era{global_tag}/TkEleLooseSig_1_TkEleLooseSig/{variable}.root:DoubleElectron_PU200"
         Eff_den: *denom
         Rate: "era{global_tag}/TkEleLooseBkg_1_TkEleLooseBkg/TkEleLoose_pt.root:MinBias"
-        global_tag: "140Xv0B9"
+        global_tag: "140Xv0C1"
     CompositeID (???): #Cut on hwQual, god knows what it is
         Eff_num: "era{global_tag}/TkEleTightSig_1_TkEleTightSig/{variable}.root:DoubleElectron_PU200"
         Eff_den: *denom
         Rate: "era{global_tag}/TkEleTightBkg_1_TkEleTightBkg/TkEleTight_pt.root:MinBias"
-        global_tag: "140Xv0B9"
+        global_tag: "140Xv0C1"
     Loose EllipticID:
-        global_tag: "140Xv0B9"
+        global_tag: "140Xv0C1"
         #Eff
         Eff_num: "zsnap/era{global_tag}/eval_bdt_1_full/DoubleElectron_PU200_test.root"
         Eff_den: *test_denom
@@ -54,7 +54,7 @@ objs_map:
         Bins: [    0,     5,     10,    20,    30,    50]
         Thrs: [ -1,  -1,  -1,   -1, -1,  -1]
     TkEle (Tight):
-        global_tag: "140Xv0B9"
+        global_tag: "140Xv0C1"
         #Eff
         Eff_num: "zsnap/era{global_tag}/eval_bdt_1_full/DoubleElectron_PU200_test.root"
         Eff_den: *test_denom
@@ -68,7 +68,7 @@ objs_map:
         Bins: [    0,     5,     10,    20,    30,    50]
         Thrs: [ 1.00,  0.25,  0.0,   -0.025, -0.1,  0.05]
     TkEle (Loose):
-        global_tag: "140Xv0B9"
+        global_tag: "140Xv0C1"
         #Eff
         Eff_num: "zsnap/era{global_tag}/eval_bdt_1_full/DoubleElectron_PU200_test.root"
         Eff_den: *test_denom

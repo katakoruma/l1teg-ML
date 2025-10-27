@@ -1,7 +1,6 @@
 # TO run only on samples that will be used for training (140Xv0B9)
 
-DIR="/eos/user/l/lekerner/www/l1teg/Endcap/PU200_train"
-#DIR="/eos/user/l/lekerner/l1teg/Endcap/PU200"
+DIR="/eos/user/l/lekerner/www/l1teg/Endcap/1"
 ERA="140Xv0C1"
 
 #Save only the cluster pt histogram
