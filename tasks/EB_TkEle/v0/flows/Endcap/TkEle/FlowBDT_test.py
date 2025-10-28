@@ -7,8 +7,7 @@ from CMGRDF.collectionUtils import DefineSkimmedCollection
 from cpp import load_conifer
 from flows.Endcap.TkEle import FlowBase as base
 
-
-def flow(bdt_path=None, dir="model_1"):
+def flow(bdt_path=f"/eos/user/l/lekerner/www/l1teg/Endcap/1/results/model_1/", dir="model_1"):
     assert bdt_path is not None, (
         "bdt_path (path to the folder containing the q_<nbits>/conifer_model.json file) must be provided"
     )
@@ -19,11 +18,11 @@ def flow(bdt_path=None, dir="model_1"):
     if not os.path.exists(os.path.join(bdt_path, f"{dir}")):
         raise ValueError(f"BDT model for {dir} bits not found in {bdt_path}")
 
-    conifer_model_path = f"/eos/user/l/lekerner/www/l1teg/Endcap/PU200_train/results/ids/conifer_model.json" 
+    conifer_model_path = f"{bdt_path}/{dir}/{dir}/conifer_model.json"
 
     load_conifer.declare(conifer_model_path, 64)
 
-    scaler = pd.read_json(f"/eos/user/l/lekerner/www/l1teg/Endcap/PU200_train/results/ids/scaler.json")
+    scaler = pd.read_json(f"{bdt_path}/{dir}/scaler.json")
     features = scaler["feature_name"].values.tolist()
     scale_steps = []
     for feature in features:

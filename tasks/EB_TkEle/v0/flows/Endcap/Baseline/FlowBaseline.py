@@ -6,9 +6,9 @@ from CMGRDF.collectionUtils import DefineSkimmedCollection
 
 def create_regions(tree, name_obj, new_name=None, tight=True, region="EE"):
     if region=="EB":
-        region_sel = " < 1.479"
+        mask = f"abs({eta}) < 1.479"
     elif region=="EE":
-        region_sel = " > 1.479"
+        mask = f"abs({eta}) > 1.479 && abs({eta}) < 2.4"
     else:
         raise ValueError("region must be either EB or EE")
 
@@ -25,9 +25,7 @@ def create_regions(tree, name_obj, new_name=None, tight=True, region="EE"):
     #? ----------------- Obj Selection ---------------- #
     # Select in barrel and tight ID
     if tight is True:
-        mask = f"({name_obj}_hwQual & 2)==2 && abs({eta}) {region_sel}"
-    else:
-        mask = f"abs({eta}) {region_sel}"
+        mask = f"({name_obj}_hwQual & 2)==2 && {mask}"
 
     eta = eta.replace(name_obj, new_name)
     phi = phi.replace(name_obj, new_name)
@@ -74,14 +72,14 @@ def flow(objs=objs, region="EE"):
 
     #Select GenEl in the region of interest
     if region=="EB":
-        region_sel = " < 1.479"
+        mask=f"abs(GenEl_eta) < 1.479"
     elif region=="EE":
-        region_sel = " > 1.479"
+        mask=f"abs(GenEl_eta) > 1.479 && abs(GenEl_eta) < 2.4"
     else:
         raise ValueError("region must be either EB or EE")
 
     tree.add("gen", [
-        DefineSkimmedCollection("GenEl", mask=f"abs(GenEl_eta) {region_sel}"),
+        DefineSkimmedCollection("GenEl", mask=mask),
         Cut(f"nGenEl_{region}>0", "nGenEl > 0", samplePattern="(?!MinBias).*"),
         Cut("nGenEl==0", "nGenEl== 0", samplePattern="MinBias.*"),
         Define("nEvents", "1."),
