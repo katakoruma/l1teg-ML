@@ -1,4 +1,7 @@
 # %%
+import sys
+sys.path.append("/afs/cern.ch/work/l/lekerner/code/l1teg-ML/models/EB_TkEleID/xgb_2class/v1/")
+sys.path.append("/afs/cern.ch/work/l/lekerner/code/l1teg-ML/utils/BitHub")
 from utils.data import (
     generate_paths,
     load_df,
@@ -181,7 +184,7 @@ plot_roc(
 
 #!------------------------------------ ROC per pt ----------------------------------!#
 
-pt_bins = (0, 5, 10, 20, 30, 50, 100)
+pt_bins = (5, 10, 20, 30, 50, 100)
 
 _, aucs = plot_roc_bins(
     df_test_best,
@@ -192,7 +195,7 @@ _, aucs = plot_roc_bins(
     var_name="TkEle_CryClu_pt",
     xlim=(-0.025, 0.5),
     var_bins=pt_bins,
-    save=f"{path}/results/{dir}/plots/roc_pt_bestTkEle_test",
+    save=f"{path}/results/{dir}/plots/roc_pt_bestTkEle_test_new",
 )
 
 plot_roc_bins(
@@ -204,7 +207,7 @@ plot_roc_bins(
     var_name="TkEle_CryClu_pt",
     xlim=(-0.025, 0.5),
     var_bins=pt_bins,
-    save=f"{path}/results/{dir}/plots/roc_pt_bestTkEle_train",
+    save=f"{path}/results/{dir}/plots/roc_pt_bestTkEle_train_new",
 )
 # quant_aucs[f"{quant}"] = aucs
 # quant_models[quant] = model
