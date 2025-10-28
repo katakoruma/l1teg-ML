@@ -8,9 +8,8 @@ def declare(filename, nbits):
     #include <ap_fixed.h>
     #include <conifer.h>
     #include <alias.cpp>
-
-    typedef ap_fixed< <NBITS>, 1, AP_RND_CONV, AP_SAT> input_t;
-    typedef ap_fixed<11, 4, AP_RND_CONV, AP_SAT> score_t;
+    typedef ap_fixed<64,32,AP_RND_CONV,AP_SAT> input_t;
+    typedef ap_fixed<64,32,AP_RND_CONV,AP_SAT> score_t;
     conifer::BDT< input_t, score_t , false> bdt(<FILENAME>);
 
 
@@ -32,7 +31,7 @@ def declare(filename, nbits):
             }
             res[tkEle_idx] = bdt._decision_function_float(x)[0];
         }
-        return res/8;
+        return res/4;
     }
     #endif
     """
