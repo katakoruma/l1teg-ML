@@ -13,13 +13,13 @@ vars:
 
 
 objs_map:
-    EllipticID (Tight):
+    Baseline model (Tight):
         global_tag: "140Xv0C1"
         Eff_num: "era{global_tag}/TkEleTightSig_1_TkEleTightSig/{variable}.root:DoubleElectron_PU200"
         Eff_den: "era{global_tag}/0common_0_gen/{variable}.root:DoubleElectron_PU200"
         Rate: "era{global_tag}/TkEleTightBkg_1_TkEleTightBkg/TkEleTight_pt.root:MinBias"
 
-    EllipticID (Loose):
+    Baseline model (Loose):
         global_tag: "140Xv0C1"
         Eff_num: "era{global_tag}/TkEleLooseSig_1_TkEleLooseSig/{variable}.root:DoubleElectron_PU200"
         Eff_den: "era{global_tag}/0common_0_gen/{variable}.root:DoubleElectron_PU200"
@@ -38,9 +38,10 @@ objs_map:
         #Both
         score: "TkEle_score"
         binVar: "TkEle_CryClu_pt"
-        Bins: [ 0, 5, 10, 30]
-        Thrs: [0.17, 0.018, -0.08, -0.11]
-        # Thrs: [0.17, 0.018, 0.1, 0.1]
+   #     Bins: [ 0, 5, 10, 30]
+   #     Thrs: [0.17, 0.018, -0.08, -0.11]
+        Bins: [ 0, 5, 10, 30, 40]
+        Thrs: [0.1, 0.1, 0.4, 0.4, 0.15]
 
     151X (Loose):
         global_tag: "140Xv0C1"
@@ -73,5 +74,5 @@ plots:
             - 151X (Tight)
             - 151X (Loose)
            # - TkEle (Tight)
-            - EllipticID (Tight)
-            - EllipticID (Loose)
+            - Baseline model (Tight)
+            - Baseline model (Loose)
