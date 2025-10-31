@@ -13,9 +13,9 @@ genele_name = "GenEl"
 
 def flow(region="EB"):
     if region == "EB":
-        region_sel = " < 1.479"
+        mask = f"abs(GenEl_eta) < 1.479"
     elif region == "EE":
-        region_sel = " > 1.479"
+        mask = f"abs(GenEl_eta) > 1.479 && abs(GenEl_eta) < 2.4"
     else:
         raise ValueError("Invalid region. Choose 'EB' or 'EE'.")
 
@@ -25,7 +25,7 @@ def flow(region="EB"):
         "matching",
         [
             #! ---------- Acceptance selection --------- #
-            DefineSkimmedCollection("GenEl", mask=f"abs(GenEl_eta) {region_sel}"),
+            DefineSkimmedCollection("GenEl", mask=mask),
             #! ----------------- Alias ----------------- #
             AliasCollection("GenEle", genele_name),
             AliasCollection("CryClu", cryclu_name),

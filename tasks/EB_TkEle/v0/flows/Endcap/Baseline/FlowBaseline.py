@@ -5,12 +5,6 @@ from CMGRDF.collectionUtils import DefineSkimmedCollection
 
 
 def create_regions(tree, name_obj, new_name=None, tight=True, region="EE"):
-    if region=="EB":
-        mask = f"abs({eta}) < 1.479"
-    elif region=="EE":
-        mask = f"abs({eta}) > 1.479 && abs({eta}) < 2.4"
-    else:
-        raise ValueError("region must be either EB or EE")
 
 
     if name_obj == "TkEleL2":
@@ -23,9 +17,17 @@ def create_regions(tree, name_obj, new_name=None, tight=True, region="EE"):
     if new_name is None:
         new_name = name_obj
     #? ----------------- Obj Selection ---------------- #
+
+    if region=="EB":
+        mask = f"abs({eta}) < 1.479"
+    elif region=="EE":
+        mask = f"abs({eta}) > 1.479 && abs({eta}) < 2.4"
+    else:
+        raise ValueError("region must be either EB or EE")
+
     # Select in barrel and tight ID
     if tight is True:
-        mask = f"({name_obj}_hwQual & 2)==2 && {mask}"
+        mask = f"({name_obj}_hwQual & 2)==2 && ({mask})"
 
     eta = eta.replace(name_obj, new_name)
     phi = phi.replace(name_obj, new_name)
