@@ -31,7 +31,7 @@ def declare(filename, nbits):
             }
             res[tkEle_idx] = bdt._decision_function_float(x)[0];
         }
-        return res/4;
+        return res/8;
     }
     #endif
     """
