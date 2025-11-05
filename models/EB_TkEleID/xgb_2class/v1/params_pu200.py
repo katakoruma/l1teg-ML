@@ -45,7 +45,7 @@ features = [
  #   "CryClu_last1layers",
  #   "CryClu_last3layers",
  #   "CryClu_last5layers",
-     "CryClu_emf",
+     "CryClu_hwEmf",
     #"CryClu_hoe",
 ]
 
@@ -100,7 +100,7 @@ saturate = {
 #    "CryClu_last1layers": (0, 64),  # Default range added
 #    "CryClu_last3layers": (0, 64),  # Default range added
 #    "CryClu_last5layers": (0, 64),  # Default range added
-    "CryClu_emf": (0, 1),
+    "CryClu_hwEmf": (0, 1),
 #    "CryClu_hoe": (0, 64),  # Default range added
 }
 
