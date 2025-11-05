@@ -15,15 +15,15 @@ vars:
 objs_map:
     Baseline model (Tight):
         global_tag: "140Xv0C1"
-        Eff_num: "era{global_tag}/TkEleTightSig_1_TkEleTightSig/{variable}.root:DoubleElectron_PU200"
-        Eff_den: "era{global_tag}/0common_0_gen/{variable}.root:DoubleElectron_PU200"
-        Rate: "era{global_tag}/TkEleTightBkg_1_TkEleTightBkg/TkEleTight_pt.root:MinBias"
+        Eff_num: "era{global_tag}/TkEleTightSig_1_TkEleTightSig/{variable}.root:DoubleElectron_PU200_test"
+        Eff_den: "era{global_tag}/0common_0_gen/{variable}.root:DoubleElectron_PU200_test"
+        Rate: "era{global_tag}/TkEleTightBkg_1_TkEleTightBkg/TkEleTight_pt.root:MinBias_test"
 
     Baseline model (Loose):
         global_tag: "140Xv0C1"
-        Eff_num: "era{global_tag}/TkEleLooseSig_1_TkEleLooseSig/{variable}.root:DoubleElectron_PU200"
-        Eff_den: "era{global_tag}/0common_0_gen/{variable}.root:DoubleElectron_PU200"
-        Rate: "era{global_tag}/TkEleLooseBkg_1_TkEleLooseBkg/TkEleLoose_pt.root:MinBias"
+        Eff_num: "era{global_tag}/TkEleLooseSig_1_TkEleLooseSig/{variable}.root:DoubleElectron_PU200_test"
+        Eff_den: "era{global_tag}/0common_0_gen/{variable}.root:DoubleElectron_PU200_test"
+        Rate: "era{global_tag}/TkEleLooseBkg_1_TkEleLooseBkg/TkEleLoose_pt.root:MinBias_test"
 
     151X (Tight):
         global_tag: "140Xv0C1"
@@ -41,7 +41,7 @@ objs_map:
    #     Bins: [ 0, 5, 10, 30]
    #     Thrs: [0.17, 0.018, -0.08, -0.11]
         Bins: [ 0, 5, 10, 30, 40]
-        Thrs: [0.1, 0.1, 0.4, 0.4, 0.15]
+        Thrs: [0.15, 0.15, 0.32, 0.32, 0.]
 
     151X (Loose):
         global_tag: "140Xv0C1"
@@ -75,4 +75,4 @@ plots:
             - 151X (Loose)
            # - TkEle (Tight)
             - Baseline model (Tight)
-            - Baseline model (Loose)
+            # - Baseline model (Loose)
