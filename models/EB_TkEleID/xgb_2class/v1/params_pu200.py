@@ -2,42 +2,35 @@ tag = "140Xv0C1"
 path = f"/eos/user/l/lekerner/www/l1teg/Endcap/1"
 P0 = f"{path}/zsnap/era{tag}/reweight_1_full"
 
-features = [
-    "TkEleL2_pt",
-    "TkEleL2_phi",
-    "TkEleL2_eta",
-    "DecEmCaloHGCal_pt",
-    "DecEmCaloHGCal_phi",
-    "DecEmCaloHGCal_eta"
-
-    
-]
+dir = 'model_6'
 
 features = [
-    "CryClu_pt",
+#    "CryClu_pt",
 #    "CryClu_eta",
     # "CryClu_phi",
-#    "CryClu_showerShape",
     "CryClu_EmIdProb",
     # "CryClu_PuIdProb",
     "CryClu_piIdProb",
+    "CryClu_sigmarr",
+    "CryClu_zbarycenter",
    # "CryClu_relIso",
 #    "CryClu_caloIso",
 #    "CryClu_standaloneWP",
 #    "CryClu_looseL1TkMatchWP",
     "Tk_chi2RPhi",
-    # "Tk_chi2Bend",
-    # "Tk_chi2RZ",
-    "Tk_ptFrac",
+    "Tk_chi2Bend",
+    "Tk_chi2RZ",
+#    "Tk_ptFrac",
     # "Tk_eta",
     # "Tk_phi",
+    "Tk_pt",
    # "Tk_caloPhi",
 #    "Tk_caloEta",
    # "GenEle_calophi",
    # "GenEle_caloeta",
    # "GenEle_pt",
     "PtRatio",
-    # "nTkMatch",
+    "nTkMatch",
     "absdeta",
     # "absdphi",
     # "CryClu_showerlength",
@@ -52,8 +45,8 @@ features = [
  #   "CryClu_last1layers",
  #   "CryClu_last3layers",
  #   "CryClu_last5layers",
-    # "CryClu_emf",
- #   "CryClu_hoe",
+     "CryClu_emf",
+    #"CryClu_hoe",
 ]
 
 auxiliary = [   "GenEle_pt", 
@@ -61,7 +54,8 @@ auxiliary = [   "GenEle_pt",
                 "label", 
                 "weight",
                 "sumTkPt", 
-                "CryClu_idx"
+                "CryClu_idx",
+                "CryClu_pt"
             ]
 
 samples = [
@@ -72,14 +66,17 @@ samples = [
 ]
 
 saturate = {
-    "CryClu_pt": (0, 128),
+#    "CryClu_pt": (0, 128),
     "CryClu_EmIdProb": (0, 2),
 #    "CryClu_PuIdProb": (0, 2),
     "CryClu_piIdProb": (0, 2),
     "Tk_chi2RPhi": (0, 16),
-#    "Tk_chi2Bend": (0, 16),
-#    "Tk_chi2RZ": (0, 16),
-    "Tk_ptFrac": (0, 64),
+    "Tk_chi2Bend": (0, 16),
+    "Tk_chi2RZ": (0, 16),
+    "CryClu_sigmarr": (0, 0.01),
+    "CryClu_zbarycenter": (0, 512),
+  #  "Tk_ptFrac": (0, 64),
+#    "Tk_pt": (0, 128),
 #    "CryClu_relIso": (0, 1),
 #    "CryClu_caloIso": (0, 1),
 #    "Tk_caloPhi": (0, 64),  # Default range added
@@ -88,7 +85,7 @@ saturate = {
 #    "GenEle_caloeta": (0, 64),  # Default range added
 #    "GenEle_pt": (0, 64),  # Default range added
     "PtRatio": (0, 32),
-#    "nTkMatch": (0, 16),
+    "nTkMatch": (0, 16),
     "absdeta": (0, 8),
 #    "absdphi": (0, 64),
 #    "CryClu_showerlength": (0, 64),
@@ -103,7 +100,7 @@ saturate = {
 #    "CryClu_last1layers": (0, 64),  # Default range added
 #    "CryClu_last3layers": (0, 64),  # Default range added
 #    "CryClu_last5layers": (0, 64),  # Default range added
-#    "CryClu_emf": (0, 1),
+    "CryClu_emf": (0, 1),
 #    "CryClu_hoe": (0, 64),  # Default range added
 }
 
