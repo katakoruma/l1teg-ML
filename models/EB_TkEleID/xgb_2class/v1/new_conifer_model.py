@@ -177,25 +177,25 @@ fig.savefig(f"{path}/results/{dir}/plots/hls_vs_xgb.pdf")
 # %%
 
 # #!------------------------------------ Evaluate -----------------------------------!#
-raw_func = lambda x: np.log(x / (1 - x)) / 8
-df_train["score"] = raw_func(xgb_model.predict(dtrain))
-df_test["score"] = raw_func(xgb_model.predict(dtest))
+# raw_func = lambda x: np.log(x / (1 - x)) / 8
+# df_train["score"] = raw_func(model.predict(dtrain))
+# df_test["score"] = raw_func(model.predict(dtest))
 
-sig_test["score"] = df_test["score"][df_test["TkEle_label"] == 1]
-sig_train["score"] = df_train["score"][df_train["TkEle_label"] == 1]
-bkg_test["score"] = df_test["score"][df_test["TkEle_label"] == 0]
-bkg_train["score"] = df_train["score"][df_train["TkEle_label"] == 0]
+# sig_test["score"] = df_test["score"][df_test["TkEle_label"] == 1]
+# sig_train["score"] = df_train["score"][df_train["TkEle_label"] == 1]
+# bkg_test["score"] = df_test["score"][df_test["TkEle_label"] == 0]
+# bkg_train["score"] = df_train["score"][df_train["TkEle_label"] == 0]
 
 
-sig_train_best, sig_test_best = take_max_score(
-    ["TkEle_ev_idx", "TkEle_GenEle_idx"], sig_train, sig_test
-)
-bkg_train_best, bkg_test_best = take_max_score(
-    ["TkEle_ev_idx", "TkEle_CryClu_idx"], bkg_train, bkg_test
-)
+# sig_train_best, sig_test_best = take_max_score(
+#     ["TkEle_ev_idx", "TkEle_GenEle_idx"], sig_train, sig_test
+# )
+# bkg_train_best, bkg_test_best = take_max_score(
+#     ["TkEle_ev_idx", "TkEle_CryClu_idx"], bkg_train, bkg_test
+# )
 
-df_test_best = pd.concat([sig_test_best, bkg_test_best])
-df_train_best = pd.concat([sig_train_best, bkg_train_best])
+# df_test_best = pd.concat([sig_test_best, bkg_test_best])
+# df_train_best = pd.concat([sig_train_best, bkg_train_best])
 
 
 # %%
@@ -229,18 +229,20 @@ _, aucs = plot_roc_bins(
     save=f"{path}/results/{dir}/plots/roc_pt_bestTkEle_test_conifer",
 )
 
-plot_roc_bins(
-    df_train,
-    score="TkEle_xgb_score",
-    label="$p_T$",
-    units="GeV",
-    y="TkEle_label",
-    var_name="TkEle_CryClu_pt",
-    xlim=(-0.025, 0.5),
-    var_bins=pt_bins,
-    thresholds=thresholds,
-    save=f"{path}/results/{dir}/plots/roc_pt_bestTkEle_train_conifer",
-)
+# plot_roc_bins(
+#     df_train,
+#     score="TkEle_xgb_score",
+#     label="$p_T$",
+#     units="GeV",
+#     y="TkEle_label",
+#     var_name="TkEle_CryClu_pt",
+#     xlim=(-0.025, 0.5),
+#     var_bins=pt_bins,
+#     thresholds=thresholds,
+#     save=f"{path}/results/{dir}/plots/roc_pt_bestTkEle_train_conifer",
+# )
+
+
 # quant_aucs[f"{quant}"] = aucs
 # quant_models[quant] = model
 # quant_params[quant] = params

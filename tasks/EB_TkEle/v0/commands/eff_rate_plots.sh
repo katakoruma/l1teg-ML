@@ -1,1 +1,1 @@
-python scripts/eff_rate.py -c scripts/effrate_cfg/test.yaml  -i /eos/user/l/lekerner/www/l1teg/Endcap/1 --lines
+python scripts/eff_rate.py -c scripts/effrate_cfg/endcap.yaml -i /eos/user/l/lekerner/www/l1teg/Endcap/1 --lines -o zeff

@@ -1,5 +1,9 @@
 # %%
-from utils.data import (
+import sys
+sys.path.append("/afs/cern.ch/work/l/lekerner/code/l1teg-ML/models/EB_TkEleID/xgb_2class/v1/")
+sys.path.append("/afs/cern.ch/work/l/lekerner/code/l1teg-ML/utils/BitHub")
+
+from custom.data import (
     generate_paths,
     load_df,
     normalize_weight,
@@ -8,7 +12,7 @@ from utils.data import (
     take_max_score
 )
 
-from utils.plot.post_train import (
+from custom.plot.post_train import (
     plot_loss,
     plot_importance,
     plot_scores,
@@ -50,7 +54,7 @@ df_train, df_test = concatenate(
 # what = train, optimize
 what = "train"
 
-quantizations = ["float"]
+quantizations = [8, "float"]
 quant_aucs = {}
 quant_models = {}
 quant_params = {}

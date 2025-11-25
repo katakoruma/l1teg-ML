@@ -2,16 +2,17 @@
 import sys
 sys.path.append("/afs/cern.ch/work/l/lekerner/code/l1teg-ML/models/EB_TkEleID/xgb_2class/v1/")
 sys.path.append("/afs/cern.ch/work/l/lekerner/code/l1teg-ML/utils/BitHub")
-from utils.data import (
+from custom.data import (
     generate_paths,
     load_df,
     normalize_weight,
     concatenate,
     df_to_DMatrix,
-    take_max_score
+    take_max_score,
+    dmatrix_to_dataframe
 )
 
-from utils.plot.post_train import (
+from custom.plot.post_train import (
     plot_loss,
     plot_importance,
     plot_scores,
@@ -19,6 +20,7 @@ from utils.plot.post_train import (
     plot_roc_bins,
     plot_quant_aucs,
 )
+from custom.plot.features import profile, plot_input_features
 
 from bithub.scalers import BitScaler
 
@@ -26,11 +28,12 @@ from bayes_opt import BayesianOptimization
 import numpy as np
 import xgboost as xgb
 
-from params_pu200 import features, auxiliary, samples, tag, P0, saturate, path
+from params_pu200 import features, auxiliary, samples, tag, P0, saturate, path, dir, feat_info, feat_info_normalized
 import pandas as pd
 import json, os
+import shutil
 
-dir = 'model_1'
+
 
 # %%
 #!------------------------------------- Load Dataframe -------------------------------------!#
@@ -48,6 +51,12 @@ df_train, df_test = concatenate(
     {"train": [sig_train, bkg_train], "test": [sig_test, bkg_test]}
 )
 
+# Copy the current script to the specified directory
+
+destination_dir = f"{path}/results/{dir}"
+os.makedirs(destination_dir, exist_ok=True)
+shutil.copy(__file__, os.path.join(destination_dir, "new_train.py"))
+
 scaler = None
 scaler = BitScaler()
 scaler.fit(
@@ -55,7 +64,7 @@ scaler.fit(
     columns=features,
     target=(-1 , 1 ),
     saturate=saturate,
-#    precision = "float"
+  #  precision = "float"
 )
 
 
@@ -65,39 +74,57 @@ dtrain, dtest, dtest_cut = df_to_DMatrix(
     df_test[df_test["TkEle_CryClu_pt"] < df_train["TkEle_CryClu_pt"].max()],
     features=features,
     y="TkEle_label",
-   #  bitscaler=scaler,
+ #   bitscaler=scaler,
    # ap_fixed=q if q != "float" else None,
     weight="TkEle_weight",
     class_weights="balanced",
 )
 
-#%%
 
+# sig_train, bkg_train = df_to_DMatrix(
+#     sig_train,
+#     bkg_train,
+#     features=features,
+#     y="TkEle_label",
+#     bitscaler=scaler,
+#    # ap_fixed=q if q != "float" else None,
+#     weight="TkEle_weight",
+#     class_weights="balanced",
+# )
+
+
+# df_train['TkEle_CryClu_emf'] = 1-df_train['TkEle_CryClu_emf']
+# sig_train['TkEle_CryClu_emf'] = 1-sig_train['TkEle_CryClu_emf']
+# bkg_train['TkEle_CryClu_emf'] = 1-bkg_train['TkEle_CryClu_emf']
+
+
+
+#%%
 def train(
-        dtrain,
-        dtest,
-        dtest_cut,
-        max_depth=12,
-        learning_rate=0.45,
-        subsample=0.8,
-        colsample_bytree=1.0,
-        alpha=1500,
-        lambd=1500,
-        min_split_loss=5,
-        min_child_weight=80,
-        num_round=15,
+    dtrain,
+    dtest,
+    dtest_cut,
+    max_depth=10,
+    learning_rate=0.3,
+    subsample=1.0,
+    colsample_bytree=1.0,
+    gamma=150,
+    alpha=2000,
+    lambd=2000,
+    min_split_loss=10,
+    min_child_weight=1,
+    num_round=20,
     ):
     
-    #global model, eval_result, dtrain, dtest_cut, params, _num_round
     params = {
         "tree_method": "hist",
         "max_depth": int(max_depth),
         "learning_rate": learning_rate,
         "lambda": lambd,
         "alpha": alpha,
+        "gamma": gamma,
         "colsample_bytree": colsample_bytree,
         "subsample": subsample,
-        # "gamma":5,
         "min_split_loss": min_split_loss,
         "min_child_weight": min_child_weight,
         "objective": "binary:logistic",
@@ -106,7 +133,6 @@ def train(
 
     global model, eval_result, _num_round
 
-    num_round = 14
     _num_round = num_round
     evallist = [(dtrain, "train"), (dtest_cut, "eval")]
     eval_result = {}
@@ -122,7 +148,8 @@ def train(
     )
     print(params)
     return -eval_result["eval"][params["eval_metric"]][-1]
-# %%
+
+## %%
 
 fixed_params = {
     #"alpha": 115.86842537080673,
@@ -134,9 +161,9 @@ fixed_params = {
     "min_split_loss": 100.,
     "subsample": 1.,
 }
-train(dtrain=dtrain, dtest=dtest, dtest_cut=dtest_cut, **fixed_params)
+train(dtrain=dtrain, dtest=dtest, dtest_cut=dtest_cut)
 
-# %%
+## %%
 
 #!------------------------------------ Evaluate -----------------------------------!#
 raw_func = lambda x: np.log(x / (1 - x)) / 8
@@ -173,6 +200,19 @@ plot_scores(
     log=True,
 )
 
+sig_train = scaler.apply(sig_train)
+bkg_train = scaler.apply(bkg_train)
+
+
+plot_input_features(
+    sig_train,
+    bkg_train,
+    feat_info=feat_info_normalized,
+    weight="TkEle_weight",
+    features=features,
+    save=f"{path}/results/{dir}/input_features_rescaled",
+)
+
 #!------------------------------------ Plot ROCs (only test) ----------------------------------!#
 plot_roc(
     df_train,
@@ -184,7 +224,7 @@ plot_roc(
 
 #!------------------------------------ ROC per pt ----------------------------------!#
 
-pt_bins = (5, 10, 20, 30, 50, 100)
+pt_bins = (0, 10, 20, 30, 50, 100)
 
 _, aucs = plot_roc_bins(
     df_test_best,

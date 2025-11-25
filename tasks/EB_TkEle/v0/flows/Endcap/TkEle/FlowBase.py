@@ -13,9 +13,9 @@ genele_name = "GenEl"
 
 def flow(region="EE"):
     if region == "EB":
-        mask = f"abs(TkEle_caloEta) < 1.479"
+        mask = f"abs(GenEl_eta) < 1.479"
     elif region == "EE":
-        mask = f"abs(TkEle_caloEta) > 1.479 && abs(TkEle_caloEta) < 2.4"
+        mask = f"abs(GenEl_eta) > 1.479 && abs(GenEl_eta) < 2.4"
     else:
         raise ValueError("Invalid region. Choose 'EB' or 'EE'.")
 

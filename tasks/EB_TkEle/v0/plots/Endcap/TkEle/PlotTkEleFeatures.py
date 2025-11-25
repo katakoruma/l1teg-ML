@@ -44,6 +44,7 @@ tkele_features = [
     "CryClu_last5layers",
     "CryClu_hbm",
     "CryClu_hoe",
+    "CryClu_emf",
 ]
 
 def plots(th2=False, reweight=True, pt_only=False, score_only=False):

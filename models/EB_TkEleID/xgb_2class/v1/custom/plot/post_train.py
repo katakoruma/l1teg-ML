@@ -195,6 +195,7 @@ def plot_roc(*dfs, label=None, score=None, y=None, weight=None, save=None, ax=No
         ax.set_xlabel("Background Efficiency")
         ax.set_ylabel("Signal Efficiency")
         ax.legend(fontsize=18)
+        ax.grid(visible=True, which='both', linestyle='--', linewidth=0.5, alpha=0.7)
 
         if lines is not None:
             if not isinstance(lines, list|tuple):
@@ -218,14 +219,28 @@ def plot_roc(*dfs, label=None, score=None, y=None, weight=None, save=None, ax=No
             fig.savefig(save + ".pdf")
     return ax, aucs
 
-def plot_roc_bins(df, label=None, units=None, var_name=None, var_bins=None, save = None, **kwargs):
+def plot_roc_bins(df, label=None, units=None, var_name=None, var_bins=None, thresholds=None, save=None, y="TkEle_label", score="TkEle_score", **kwargs):
     fig, ax = plt.subplots()
     dfs=[]
     labels=[]
     for i in range(len(var_bins)-1):
         labels.append(f"{label} = [{var_bins[i]},{var_bins[i+1]}] {units}")
         dfs.append(df[(df[var_name] > var_bins[i]) & (df[var_name] < var_bins[i+1])])
-    ax, aucs = plot_roc(*dfs, ax=ax, label=labels, **kwargs)
+
+        if thresholds is not None:
+            df_bin = dfs[-1]
+            score_sig = df_bin[df_bin[y]==1][score]
+            score_bkg = df_bin[df_bin[y]==0][score]
+            thr = thresholds[i] if i < len(thresholds) else thresholds[-1]
+
+            eff_sig = np.sum((score_sig > thr).astype(float)) / len(score_sig)
+            eff_bkg = np.sum((score_bkg > thr).astype(float)) / len(score_bkg)
+            lab = f"Threshold {thr} for label = [{var_bins[i]},{var_bins[i+1]}] {units}"
+            ax.plot(eff_bkg, eff_sig, marker='o', label=lab, markersize=8)
+
+
+    ax, aucs = plot_roc(*dfs, ax=ax, label=labels, y=y, score=score, **kwargs)
+
     if save:
         os.makedirs(os.path.dirname(save), exist_ok=True)
         os.system(f"cp -n {php_index} {os.path.dirname(save)}")

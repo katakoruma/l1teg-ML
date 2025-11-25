@@ -6,6 +6,7 @@ import matplotlib.patches as mpatches
 from matplotlib.lines import Line2D
 import mplhep as hep
 import hist
+import datetime
 
 hep.set_style("CMS")
 
@@ -188,3 +189,50 @@ def plot_input_features(sig_df, bkg_df, feat_info = None, features = None, weigh
         os.system(f"cp -n {php_index} {os.path.dirname(save)}")
         plt.savefig(f"{save}.pdf")
         plt.savefig(f"{save}.png")
+
+
+
+def correlation_plot(
+        data, 
+        features=None, 
+        save=False, 
+        create_dir=False,
+        run_name=datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"), 
+        figsize=(15, 9)
+    ):
+    
+    if features is None:
+        features = data.columns
+
+    fig, ax = plt.subplots(figsize=figsize)
+
+    corr = data[features].corr().to_numpy()
+
+    im_sig = ax.imshow(corr, cmap="viridis", aspect='auto')
+
+    # Show all ticks and label them with the respective list entries
+    ax.set_xticks(range(len(features)), labels=features,
+                rotation=45, ha="right", rotation_mode="anchor")
+    ax.set_yticks(range(len(features)), labels=features)
+
+
+    # Loop over data dimensions and create text annotations.
+    for i in range(len(features)):
+        for j in range(len(features)):
+            text = ax.text(j, i, round(corr[i, j],2),
+                        ha="center", va="center", color="w")
+        
+
+    fig.tight_layout()
+
+    hep.cms.lumitext("PU200 (14TeV)" , ax=ax)
+    hep.cms.text("Phase-2 simulation preliminary", ax=ax)  
+
+    if save:
+        if create_dir:
+            os.makedirs(os.path.dirname(save), exist_ok=True)
+        fig.savefig(save)
+    else:
+        fig.show()
+
+    return fig, ax

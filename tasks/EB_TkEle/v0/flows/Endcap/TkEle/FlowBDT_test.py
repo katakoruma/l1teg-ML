@@ -7,7 +7,7 @@ from CMGRDF.collectionUtils import DefineSkimmedCollection
 from cpp import load_conifer
 from flows.Endcap.TkEle import FlowBase as base
 
-def flow(bdt_path=f"/eos/user/l/lekerner/www/l1teg/Endcap/1/results/model_1/", dir="model_1"):
+def flow(bdt_path=f"/eos/user/l/lekerner/www/l1teg/Endcap/1/results/", dir="model_3"):
     assert bdt_path is not None, (
         "bdt_path (path to the folder containing the q_<nbits>/conifer_model.json file) must be provided"
     )
@@ -31,6 +31,7 @@ def flow(bdt_path=f"/eos/user/l/lekerner/www/l1teg/Endcap/1/results/model_1/", d
             Define(
                 f"_scaled_{feature}",
                 f"bitscale({feature}, {float(df['inf'].iloc[0])}, {float(df['min'].iloc[0])}, {int(df['bit_shift'].iloc[0])})",
+                # f"{feature}",
             )
         )
 

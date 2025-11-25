@@ -51,7 +51,7 @@ cmgrdf_cli.defaults.name_defaults = OrderedDict({
         log="counts",
     ),
     "(.*)_score(.*)": dict(
-        bins=(100, -1, 1),
+        bins=(50, -1, 1),
         label="($1) ($2) Score",
         log="counts",
     ),
@@ -183,8 +183,13 @@ cmgrdf_cli.defaults.name_defaults = OrderedDict({
         log="counts",
     ),
     "(.*)_hoe(.*)": dict(
-        bins=(50, 0, 1),
+        bins=(50, 0, 3),
         label="($1) ($2) H/E",
+        log="counts",
+    ),
+    "(.*)_emf(.*)": dict(
+        bins=(50, 0, 1),
+        label="($1) ($2) EMF",
         log="counts",
     ),
 })

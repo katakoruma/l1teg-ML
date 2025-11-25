@@ -161,3 +161,20 @@ def concatenate(*dfs):
     if len(res)>1:
         return (*res,)
     return res[0]
+
+
+# Convert DMatrix to DataFrame
+def dmatrix_to_dataframe(dmatrix, feature_names):
+    """
+    Convert an XGBoost DMatrix to a pandas DataFrame.
+
+    Parameters:
+        dmatrix (xgb.DMatrix): The DMatrix object to convert.
+        feature_names (list): List of feature names for the DataFrame columns.
+
+    Returns:
+        pd.DataFrame: The converted DataFrame.
+    """
+    data = dmatrix.get_data().toarray()  # Get the data as a NumPy array
+    df = pd.DataFrame(data, columns=feature_names)
+    return df
