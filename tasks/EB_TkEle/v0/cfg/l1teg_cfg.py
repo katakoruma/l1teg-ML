@@ -1,6 +1,7 @@
 from CMGRDF.cms.eras import lumis as lumi
 
-P = "/eos/cms/store/cmst3/group/l1tr/pviscone/l1teg/fp_ntuples"
+P = "/eos/user/l/lekerner/ngt/data/lekerner/fp_ntuples/barrel/"
+#P = "/eos/cms/store/cmst3/group/l1tr/pviscone/l1teg/fp_ntuples"
 
 base_tuple = (P, "{name}/FP/{era}/*.root", "")
 
@@ -17,5 +18,5 @@ def add_tag(tags):
         lumi[tag] = 0.001
 
 #140Xv0B6 contains the baseline objects (Barrel EllipticId, Endcap ???)
-add_tag(["140Xv0B6", "140Xv0B9", "140Xv0C1"])
+add_tag(["140Xv0B9"])
 

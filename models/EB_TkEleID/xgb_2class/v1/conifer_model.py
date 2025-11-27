@@ -131,7 +131,7 @@ for q in [8]:
     ax.set_xlabel("Score")
     ax.set_ylabel("Density")
     plt.legend()
-    hep.cms.text("Phase-2 Simulation Preliminary", fontsize=18, ax = ax)
+    hep.cms.text("Simulation Work in progress", fontsize=18, ax = ax)
     hep.cms.lumitext("PU 200 (14 TeV)", fontsize=18, ax = ax)
     fig.savefig(f"{modelpath}/results/q_{q}/plots/hls_vs_xgb.png")
     fig.savefig(f"{modelpath}/results/q_{q}/plots/hls_vs_xgb.pdf")

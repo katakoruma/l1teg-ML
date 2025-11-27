@@ -5,7 +5,7 @@ tag = "140Xv0C1"
 path = f"/eos/user/l/lekerner/www/l1teg/Endcap/1"
 P0 = f"{path}/zsnap/era{tag}/reweight_1_full"
 
-dir = 'model_6'
+dir = 'model_hoe'
 
 destination_dir = f"{path}/results/{dir}"
 os.makedirs(destination_dir, exist_ok=True)
@@ -52,8 +52,8 @@ features = [
  #   "CryClu_last1layers",
  #   "CryClu_last3layers",
  #   "CryClu_last5layers",
-     "CryClu_emf",
- #    "CryClu_hoe",
+ #     "CryClu_emf",
+     "CryClu_hoe",
 ]
 
 auxiliary = [   "GenEle_pt", 
@@ -107,8 +107,8 @@ saturate = {
 #    "CryClu_last1layers": (0, 64),  # Default range added
 #    "CryClu_last3layers": (0, 64),  # Default range added
 #    "CryClu_last5layers": (0, 64),  # Default range added
-    "CryClu_emf": (-1, 2),
-#    "CryClu_hoe": (-1, 3),  # Default range added
+#     "CryClu_emf": (-1, 2),
+    "CryClu_hoe": (-1, 3),  # Default range added
 }
 
 features = [f"TkEle_{f}" for f in features]

@@ -1,4 +1,4 @@
-# %%
+#%% 
 
 # %load_ext autoreload
 # %autoreload 2
@@ -57,7 +57,7 @@ import numpy as np
 #     "TkEle_CryClu_firstHcal5layers": (r"Cluster firstHcal5layers", np.linspace(0,1,30)),
 # }
 
-# %%
+#%%
 #!------------------------------------- Load Dataframe -------------------------------------!#
 paths = generate_paths(P0, tag, samples)
 sig_train, sig_test, bkg_train, bkg_test = load_df(
@@ -66,7 +66,7 @@ sig_train, sig_test, bkg_train, bkg_test = load_df(
 sig_train, bkg_train = normalize_weight(
     sig_train, bkg_train, key="TkEle_weight", kind="entries"
 )
-# %%
+#%%
 #!------------------------------------ Plot Pre-training -----------------------------------!#
 
 profile(sig_train, bkg_train, features=features, save=os.path.join(path, "results", dir, "plots", "profile_{name}")) 

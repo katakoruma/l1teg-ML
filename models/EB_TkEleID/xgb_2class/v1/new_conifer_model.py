@@ -28,7 +28,7 @@ from custom.plot.post_train import (
     plot_quant_aucs,
 )
 
-from params_pu200 import path, features, auxiliary, tag, P0, dir
+from params import path, features, auxiliary, tag, P0, dir
 precision = 64
 
 # path = '/eos/user/l/lekerner/www/l1teg/Barrel/2'
@@ -168,7 +168,7 @@ ax.set_xlabel("Score")
 ax.set_ylabel("Density")
 plt.yscale("log")
 plt.legend()
-hep.cms.text("Phase-2 Simulation Preliminary", fontsize=18, ax = ax)
+hep.cms.text("Simulation Work in progress", fontsize=18, ax = ax)
 hep.cms.lumitext("PU 200 (14 TeV)", fontsize=18, ax = ax)
 fig.savefig(f"{path}/results/{dir}/plots/hls_vs_xgb.png")
 fig.savefig(f"{path}/results/{dir}/plots/hls_vs_xgb.pdf")

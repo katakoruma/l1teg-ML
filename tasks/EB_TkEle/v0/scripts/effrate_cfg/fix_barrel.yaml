@@ -1,11 +1,10 @@
-#Denom and vars are for eff plots only
 denoms:
-    denom: &denom "era{global_tag}/0common_0_gen/{variable}.root:DoubleElectron_PU200"
+    denom: &denom "era{global_tag}/eval_bdt_0_gen/{variable}.root:DoubleElectron_PU200_test"
 
 #var, branch, xlabel (for Efficiency)
 vars:
     GenEl_pt:
-        snapBranch: "GenEl_pt"
+        snapBranch: "TkEle_GenEle_pt"
         xlabel: "Gen. $p_{T}$ [GeV]"
         rebin: 3
         xlim: [-0.2, 100]
@@ -13,63 +12,51 @@ vars:
 
 
 objs_map:
-    AR2024 (Tight):
+    Baseline model (Tight):
         global_tag: "140Xv0C1"
-        Eff_num: "era{global_tag}/TkEleL2Tight_All_1_full/{variable}.root:DoubleElectron_PU200"
-        Eff_den: *denom
-        Rate: "zsnap/era{global_tag}/TkEleL2Tight_All_1_full/MinBias.root"
-        Offline_scaling: "1.17 * online_pt + 1.538"
-        rateVar: "TkEleL2_pt"
-        #Both
-        score: "TkEleL2_idScore"
-        binVar: "TkEleL2_pt"
-        Bins: [ 0]
-        Thrs: [-1]
-    CMSSW:
+        Eff_num: "era{global_tag}/TkEleTightSig_1_TkEleTightSig/{variable}.root:DoubleElectron_PU200_test"
+        Eff_den: "era{global_tag}/0common_0_gen/{variable}.root:DoubleElectron_PU200_test"
+        Rate: "era{global_tag}/TkEleTightBkg_1_TkEleTightBkg/TkEleTight_pt.root:MinBias_test"
+
+    Baseline model (Loose):
         global_tag: "140Xv0C1"
-        #Eff
-        Eff_num: "zsnap/era{global_tag}/TkEleL2Loose_All_1_full/DoubleElectron_PU200.root" #MUST BE LOOSE
-        Eff_den: *denom
-        genIdx: "TkEleL2_genIdx"
-        #Rate
-        Rate: "zsnap/era{global_tag}/TkEleL2Loose_All_1_full/MinBias.root"
-        Offline_scaling: "1.181 * online_pt + 3.621"
-        rateVar: "TkEleL2_pt"
-        #Both
-        score: "TkEleL2_idScore"
-        binVar: "TkEleL2_pt"
-        Bins: [0, 5, 10, 20, 30, 50]
-        Thrs: [0.17, 0.018, -0.08, -0.11, -0.215, -0.15]
+        Eff_num: "era{global_tag}/TkEleLooseSig_1_TkEleLooseSig/{variable}.root:DoubleElectron_PU200_test"
+        Eff_den: "era{global_tag}/0common_0_gen/{variable}.root:DoubleElectron_PU200_test"
+        Rate: "era{global_tag}/TkEleLooseBkg_1_TkEleLooseBkg/TkEleLoose_pt.root:MinBias_test"
+
     151X (Tight):
         global_tag: "140Xv0C1"
         #Eff
-        Eff_num: "zsnap/era{global_tag}/TkEleL2Loose_All_1_full/DoubleElectron_PU200.root" #MUST BE LOOSE
+        Eff_num: "zsnap/era{global_tag}/eval_bdt_1_full/DoubleElectron_PU200_test.root" 
         Eff_den: *denom
-        genIdx: "TkEleL2_genIdx"
+        genIdx: "TkEle_GenEle_idx"
         #Rate
-        Rate: "zsnap/era{global_tag}/TkEleL2Loose_All_1_full/MinBias.root"
-        Offline_scaling: "1.181 * online_pt + 3.621"
-        rateVar: "TkEleL2_pt"
+        Rate: "zsnap/era{global_tag}/eval_bdt_1_full/MinBias_test.root"
+     #   Offline_scaling: "1.181 * online_pt + 3.621"
+        rateVar: "TkEle_CryClu_pt"
         #Both
-        score: "TkEleL2_idScore"
-        binVar: "TkEleL2_pt"
+        score: "TkEle_score"
+        binVar: "TkEle_CryClu_pt"
+        # Bins: [ 0, 5, 10, 30, 40]
+        # Thrs: [0.1, 0.2, 0.4, 0.4, 0.15]
         Bins: [ 0, 5, 10, 30]
         Thrs: [0.17, 0.018, -0.08, -0.11]
-    Loose Elliptic:
+
+    151X (Loose):
         global_tag: "140Xv0C1"
         #Eff
-        Eff_num: "zsnap/era{global_tag}/TkEleL2Loose_All_1_full/DoubleElectron_PU200.root" #MUST BE LOOSE
+        Eff_num: "zsnap/era{global_tag}/eval_bdt_1_full/DoubleElectron_PU200_test.root" 
         Eff_den: *denom
-        genIdx: "TkEleL2_genIdx"
+        genIdx: "TkEle_GenEle_idx"
         #Rate
-        Rate: "zsnap/era{global_tag}/TkEleL2Loose_All_1_full/MinBias.root"
-        Offline_scaling: "1.181 * online_pt + 3.621"
-        rateVar: "TkEleL2_pt"
+        Rate: "zsnap/era{global_tag}/eval_bdt_1_full/MinBias_test.root"
+     #   Offline_scaling: "1.181 * online_pt + 3.621"
+        rateVar: "TkEle_CryClu_pt"
         #Both
-        score: "TkEleL2_idScore"
-        binVar: "TkEleL2_pt"
-        Bins: [ 0]
-        Thrs: [-1]
+        score: "TkEle_score"
+        binVar: "TkEle_CryClu_pt"
+        Bins: [ 0, 5, 10, 30]
+        Thrs: [-1, -1, -1, -1]
 
 
 
@@ -82,7 +69,8 @@ plots:
     Tight:
         rate_kwargs: *default_rate_kwargs
         items:
-            - AR2024 (Tight)
-            - CMSSW
             - 151X (Tight)
-            - Loose Elliptic
+            - 151X (Loose)
+           # - TkEle (Tight)
+            - Baseline model (Tight)
+            # - Baseline model (Loose)

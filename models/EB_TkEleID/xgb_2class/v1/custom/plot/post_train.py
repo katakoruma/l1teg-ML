@@ -49,7 +49,7 @@ def plot_importance(model, save=None):
     ax.barh(list(sorted_rank.keys()), width=sorted_rank.values())
     ax.set_xlabel("Gain")
 
-    hep.cms.text("Phase-2 Simulation Preliminary", fontsize=18, ax=ax)
+    hep.cms.text("Simulation Work in progress", fontsize=18, ax=ax)
     hep.cms.lumitext("PU 200 (14 TeV)", fontsize=18, ax=ax)
 
     if save:
@@ -69,7 +69,7 @@ def plot_loss(eval_result, loss="logloss", save=False):
     ax.set_ylabel("LogLoss")
     ax.legend()
 
-    hep.cms.text("Phase-2 Simulation Preliminary", fontsize=18, ax=ax)
+    hep.cms.text("Simulation Work in progress", fontsize=18, ax=ax)
     hep.cms.lumitext("PU 200 (14 TeV)", fontsize=18, ax=ax)
 
     if save:
@@ -144,7 +144,7 @@ def plot_scores(
                 ax=ax,
             )
 
-    hep.cms.text("Phase-2 Simulation Preliminary", fontsize=18, ax=ax)
+    hep.cms.text("Simulation Work in progress", fontsize=18, ax=ax)
     hep.cms.lumitext("PU 200 (14 TeV)", fontsize=18, ax=ax)
 
     ax.set_xlabel("Score")
@@ -203,7 +203,7 @@ def plot_roc(*dfs, label=None, score=None, y=None, weight=None, save=None, ax=No
             for line in lines:
                 ax.plot(line, line, color="black", linestyle="--", linewidth=0.5, alpha=0.1)
 
-        hep.cms.text("Phase-2 Simulation Preliminary", fontsize=18, ax=ax)
+        hep.cms.text("Simulation Work in progress", fontsize=18, ax=ax)
         hep.cms.lumitext("PU 200 (14 TeV)", fontsize=18, ax=ax)
 
         if xlim:

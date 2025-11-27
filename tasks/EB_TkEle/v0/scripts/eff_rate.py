@@ -23,7 +23,7 @@ def _plot_eff_rate(cfg, name, output, plot_dict, obj_pattern, lines, base_path):
     objs = plot_dict["items"]
     objs_map = cfg["objs_map"]
     rate_kwargs = plot_dict.get("rate_kwargs", {})
-    tRate = TRate(cmstext="Phase-2 Simulation Preliminary",
+    tRate = TRate(cmstext="Simulation Work in progress",
         lumitext="PU 200 (14 TeV)",
         cmstextsize=18,
         grid=False, **rate_kwargs)
@@ -34,7 +34,7 @@ def _plot_eff_rate(cfg, name, output, plot_dict, obj_pattern, lines, base_path):
         tEff = TEfficiency(
             ylabel="Efficiency",
             **variable_dict,
-            cmstext="Phase-2 Simulation Preliminary",
+            cmstext="Simulation Work in progress",
             lumitext="PU 200 (14 TeV)",
             cmstextsize=18,
             grid=False,

@@ -74,7 +74,7 @@ dtrain, dtest, dtest_cut = df_to_DMatrix(
     df_test[df_test["TkEle_CryClu_pt"] < df_train["TkEle_CryClu_pt"].max()],
     features=features,
     y="TkEle_label",
- #   bitscaler=scaler,
+    bitscaler=scaler,
    # ap_fixed=q if q != "float" else None,
     weight="TkEle_weight",
     class_weights="balanced",
@@ -98,8 +98,8 @@ dtrain, dtest, dtest_cut = df_to_DMatrix(
 # bkg_train['TkEle_CryClu_emf'] = 1-bkg_train['TkEle_CryClu_emf']
 
 
-
 #%%
+
 def train(
     dtrain,
     dtest,
@@ -113,7 +113,7 @@ def train(
     lambd=2000,
     min_split_loss=10,
     min_child_weight=1,
-    num_round=20,
+    num_round=15,
     ):
     
     params = {
@@ -249,6 +249,26 @@ plot_roc_bins(
     var_bins=pt_bins,
     save=f"{path}/results/{dir}/plots/roc_pt_bestTkEle_train_new",
 )
+
+pt_bins = [0, 5, 10, 30]
+thresholds = [0.17, 0.018, -0.08, -0.11]
+
+pt_bins = (0, 5, 10, 20, 30, 50, 100)
+thresholds = [0.17, 0.018, -0.08, -0.08, -0.11, -0.11, -0.11]
+
+plot_roc_bins(
+    df_test_best,
+    score="score",
+    label="$p_T$",
+    units="GeV",
+    y="TkEle_label",
+    var_name="TkEle_CryClu_pt",
+    xlim=(-0.025, 0.5),
+    var_bins=pt_bins,
+    thresholds=thresholds,
+    save=f"{path}/results/{dir}/plots/roc_pt_bestTkEle_test_wps",
+)
+
 # quant_aucs[f"{quant}"] = aucs
 # quant_models[quant] = model
 # quant_params[quant] = params

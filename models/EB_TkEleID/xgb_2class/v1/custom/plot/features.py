@@ -125,7 +125,7 @@ def plot_input_features(sig_df, bkg_df, feat_info = None, features = None, weigh
         axs = np.array([axs])
     axs = axs.flatten()
 
-    hep.cms.text("Phase-2 Simulation Preliminary", ax=axs[0], fontsize=24)
+    hep.cms.text("Simulation Work in progress", ax=axs[0], fontsize=24)
     hep.cms.lumitext("PU 200 (14 TeV)", ax=axs[min(3, len(features))], fontsize=24)
     for idx, feat in enumerate(features):
         ax = axs[idx]
@@ -226,7 +226,7 @@ def correlation_plot(
     fig.tight_layout()
 
     hep.cms.lumitext("PU200 (14TeV)" , ax=ax)
-    hep.cms.text("Phase-2 simulation preliminary", ax=ax)  
+    hep.cms.text("Simulation Work in progress", ax=ax)  
 
     if save:
         if create_dir:
